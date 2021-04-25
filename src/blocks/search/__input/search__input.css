@@ -1,0 +1,11 @@
+.search__input {
+	width: 400px;	
+	padding: 0 0 13px;
+	border-style: none;
+	cursor: pointer;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 17px;
+	color: rgba(0, 0, 0, 1);
+	border-bottom: 1px solid rgba(0, 0, 0, .4);
+}
