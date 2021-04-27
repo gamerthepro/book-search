@@ -1,5 +1,10 @@
+import './index.css';
+
 import {Card} from '../components/Card.js'
 import {initialCards} from '../components/utils/Initial-сards.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import Section from '../components/Section.js';
+
 // function getBooks() {
 // 	document.getElementById("output").innerHTML="";
 // 	fetch("https://openlibrary.org/search.json?q="+document.getElementById("input").value)
@@ -14,69 +19,37 @@ import {initialCards} from '../components/utils/Initial-сards.js';
 // }
 const popupTypeBook = document.querySelector('.popup_type_book');
 const popupBookButtonClose = document.querySelector(".popup__close_book");
+const templateElement = '.element-template';
 
 //Переменные для popup_img
-const popupImg = popupTypeBook.querySelector('.popup__img');
 const popupTitle = popupTypeBook.querySelector('.popup__title');
 const popupSubtitle = popupTypeBook.querySelector('.popup__subtitle');
 
 //переменные для создания динамичкских карточек
 const listContenerCards = document.querySelector('.elements__contener')
 
-//Обработчики для popup__image
-popupBookButtonClose.addEventListener('click', () => closePopup(popupTypeBook));
-
-//ОТкрытие попап book
-function openPopup(popup) {
-	popup.classList.add('popup__open');
-	document.addEventListener('keydown', handleEscPress);
-	document.addEventListener('mousedown', handleOverlayClick);
-}
-
-//Закрытие попап book
-function closePopup(popup) {
-	popup.classList.remove('popup__open');
-	document.addEventListener('keydown', handleEscPress);
-	document.addEventListener('mousedown', handleOverlayClick);
-}
-
-//Обработчик закрытия попап по нажатию Esc
-function  handleEscPress(evt) {
-	if(evt.key === 'Escape') {
-		const openedPopup = document.querySelector('.popup__open');
-		closePopup(openedPopup);
-	};
-}
-
-//Обработчик закрытия попап по клику на overlay
-function handleOverlayClick(evt) {
-	if(evt.target.classList.contains('popup__open')){
-		closePopup(evt.target); 
-	};
-}
-
-//Функция открытия и заполнения поп-апа с изображением
-function openImgClick(name, link, author, data, publisher) {
-	openPopup(popupTypeBook);
-	const popupData = popupTypeBook.querySelector('.popup__data');
-	const popupPublisher = popupTypeBook.querySelector('.popup__publisher');
-	popupImg.src = link;
-	popupImg.alt = name;
-	popupTitle.textContent = name;
-	popupSubtitle.textContent = author;
-	popupData.textContent = data;
-	popupPublisher.textContent = publisher;
-}
+//Создание попапа изображения 
+const popupImg = new PopupWithImage(popupTypeBook);
+popupImg.setEventListeners();
 
 //Создание новой карточки
-function createCard(data) {
-	const card = new Card({name: data.name, link: data.link, author: data.author, data: data.data, publisher: data.publisher}, '.element-template', openImgClick);
+const handleCardClick = data => {
+	popupImg.open(data);
+};
+
+const createCard = item => {
+	const card = new Card(item, templateElement, handleCardClick);
 	const cardElement = card.generateCard();
 	return cardElement;
 }
 
-//Создание списка карточек
-initialCards.forEach((item) => {
-	const cardElement = createCard(item);
-	listContenerCards.append(cardElement);
-});
+const renderCards = new Section ({
+	items: initialCards,
+	renderer: (item) => {
+		const cardElement = createCard(item);
+		renderCards.addItem(cardElement);
+	}
+},
+listContenerCards);
+	
+renderCards.render();
