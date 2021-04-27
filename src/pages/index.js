@@ -1,3 +1,19 @@
+//ОТкрытие попап book
+const elementBook = document.querySelector(".element");
+const popupBook = document.querySelector(".popup");
+
+elementBook.addEventListener('click', () => {
+	popupBook.classList.add('popup__open');
+});
+
+//Закрытие попап book
+const popupBookButtonClose = document.querySelector(".popup__close_book");
+
+popupBookButtonClose.addEventListener('click', () => {
+	popupBook.classList.remove('popup__open');
+});
+
+
 function getBooks() {
 	document.getElementById("output").innerHTML="";
 	fetch("https://openlibrary.org/search.json?q="+document.getElementById("input").value)
