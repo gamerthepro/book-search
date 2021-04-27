@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --mode production",
+    "dev": "webpack serve"
   },
   "author": "Artem",
   "license": "ISC",
@@ -15,7 +16,7 @@
     "url": "https://github.com/gamerthepro/book-search/issues"
   },
   "homepage": "https://github.com/gamerthepro/book-search#readme",
-  "description": "https://github.com/gamerthepro/book-search.git",
+  "description": {},
   "devDependencies": {
     "@babel/core": "^7.13.16",
     "@babel/plugin-proposal-class-properties": "^7.13.0",

@@ -1,6 +1,6 @@
 import './index.css';
 
-import {Card} from '../components/Card.js'
+import Card from '../components/Card.js'
 import {initialCards} from '../components/utils/Initial-сards.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import Section from '../components/Section.js';
@@ -18,23 +18,19 @@ import Section from '../components/Section.js';
 // 	});
 // }
 const popupTypeBook = document.querySelector('.popup_type_book');
-const popupBookButtonClose = document.querySelector(".popup__close_book");
 const templateElement = '.element-template';
 
-//Переменные для popup_img
-const popupTitle = popupTypeBook.querySelector('.popup__title');
-const popupSubtitle = popupTypeBook.querySelector('.popup__subtitle');
 
 //переменные для создания динамичкских карточек
 const listContenerCards = document.querySelector('.elements__contener')
 
 //Создание попапа изображения 
-const popupImg = new PopupWithImage(popupTypeBook);
-popupImg.setEventListeners();
+const popupBook = new PopupWithImage(popupTypeBook);
+popupBook.setEventListeners();
 
 //Создание новой карточки
 const handleCardClick = data => {
-	popupImg.open(data);
+	popupBook.open(data);
 };
 
 const createCard = item => {
