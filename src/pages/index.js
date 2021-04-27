@@ -1,4 +1,5 @@
-
+import {Card} from '../components/Card.js'
+import {initialCards} from '../components/utils/Initial-сards.js';
 // function getBooks() {
 // 	document.getElementById("output").innerHTML="";
 // 	fetch("https://openlibrary.org/search.json?q="+document.getElementById("input").value)
@@ -13,109 +14,69 @@
 // }
 const popupTypeBook = document.querySelector('.popup_type_book');
 const popupBookButtonClose = document.querySelector(".popup__close_book");
-const elementBook = document.querySelector(".element");
+
+//Переменные для popup_img
+const popupImg = popupTypeBook.querySelector('.popup__img');
+const popupTitle = popupTypeBook.querySelector('.popup__title');
+const popupSubtitle = popupTypeBook.querySelector('.popup__subtitle');
 
 //переменные для создания динамичкских карточек
-const templateElement = document.querySelector('.element-template');
 const listContenerCards = document.querySelector('.elements__contener')
 
-//Динамические карточки
-const initialCards = [ 
-	{ 
-		name: 'Архыз', 
-		author: 'Архыз', 
-		link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
-		data: '21.03.2002',
-		publisher: 'Новая Россия'
-
-	}, 
-	{ 
-		name: 'Челябинская область', 
-		author: 'Челябинская область',
-		link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
-		data: '21.03.2002',
-		publisher: 'Новая Россия' 
-	}, 
-	{ 
-		name: 'Иваново',
-		author: 'Иваново',
-		link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
-		data: '21.03.2002' ,
-		publisher: 'Новая Россия'
-	}, 
-	{ 
-		name: 'Камчатка',
-		author: 'Камчатка',
-		link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
-		data: '21.03.2002',
-		publisher: 'Новая Россия'
-	}, 
-	{ 
-		name: 'Холмогорский район', 
-		author: 'Холмогорский район', 
-		link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
-		data: '21.03.2002',
-		publisher: 'Новая Россия' 
-	}, 
-	{ 
-		name: 'Байкал', 
-		author: 'Байкал', 
-		link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
-		data: '21.03.2002',
-		publisher: 'Новая Россия'
-	} 
-]; 
-
-//добавление карточек
-
-function renderList() {
-	const listItems = initialCards.map(composeItem);
-
-		listContenerCards.append(...listItems);
-}
-
-function composeItem(item){
-	const newItem = templateElement.content.cloneNode(true);
-	const elemenImg = newItem.querySelector('.element__image');
-	const elementTitle = newItem.querySelector('.element__title');
-	const elementSubtitle = newItem.querySelector('.element__subtitle');
-	elementTitle.textContent = item.name;
-	elementSubtitle.textContent = item.author;
-	elemenImg.src = item.link;
-	elemenImg.alt = item.name + '.';
-	const bookItem = newItem.querySelector('.element');
-	bookItem.addEventListener('click', () => {
-		openImgClick(item.link, item.name, item.author, item.data, item.publisher)
-	});
-	return newItem;
-}
-
 //Обработчики для popup__image
-popupBookButtonClose.addEventListener('click', handleClosePopupBook);
+popupBookButtonClose.addEventListener('click', () => closePopup(popupTypeBook));
 
 //ОТкрытие попап book
-function handleOpenPopupBook() {
-	popupTypeBook.classList.add('popup__open');
+function openPopup(popup) {
+	popup.classList.add('popup__open');
+	document.addEventListener('keydown', handleEscPress);
+	document.addEventListener('mousedown', handleOverlayClick);
 }
 
 //Закрытие попап book
-function handleClosePopupBook() {
-	popupTypeBook.classList.remove('popup__open');
+function closePopup(popup) {
+	popup.classList.remove('popup__open');
+	document.addEventListener('keydown', handleEscPress);
+	document.addEventListener('mousedown', handleOverlayClick);
+}
+
+//Обработчик закрытия попап по нажатию Esc
+function  handleEscPress(evt) {
+	if(evt.key === 'Escape') {
+		const openedPopup = document.querySelector('.popup__open');
+		closePopup(openedPopup);
+	};
+}
+
+//Обработчик закрытия попап по клику на overlay
+function handleOverlayClick(evt) {
+	if(evt.target.classList.contains('popup__open')){
+		closePopup(evt.target); 
+	};
 }
 
 //Функция открытия и заполнения поп-апа с изображением
-function openImgClick(link, name, author, data, publisher) {
-	handleOpenPopupBook(popupTypeBook);
-	const popupImg = popupTypeBook.querySelector('.popup__img');
-	const popupTitle = popupTypeBook.querySelector('.popup__title');
-	const popupSubtitle = popupTypeBook.querySelector('.popup__subtitle');
+function openImgClick(name, link, author, data, publisher) {
+	openPopup(popupTypeBook);
 	const popupData = popupTypeBook.querySelector('.popup__data');
 	const popupPublisher = popupTypeBook.querySelector('.popup__publisher');
 	popupImg.src = link;
+	popupImg.alt = name;
 	popupTitle.textContent = name;
 	popupSubtitle.textContent = author;
 	popupData.textContent = data;
 	popupPublisher.textContent = publisher;
 }
 
-renderList();
+//Создание новой карточки
+function createCard(data) {
+	const card = new Card({name: data.name, link: data.link, author: data.author, data: data.data, publisher: data.publisher}, '.element-template', openImgClick);
+	const cardElement = card.generateCard();
+	return cardElement;
+}
+
+//Создание списка карточек
+initialCards.forEach((item) => {
+	const cardElement = createCard(item);
+	listContenerCards.append(cardElement);
+});
