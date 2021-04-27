@@ -12,20 +12,95 @@
 <body class="page">
 	<div class="page__container">
 		<div class="search">
-			<input class="search__input" type="text">
-			<button class="search__button">Найти</button>
+			<input class="search__input" id="input" type="text">
+			<button class="search__button" onclick="getBooks()">Найти</button>
 		</div>
-		<template class="list">
-			<li class="element">
-				<img src="" alt="">
-				<h2></h2>
-				<p></p>
-			</li>
 
+		<section class="elements">
+			<ul class="elements__contener">
+				<li class="element" >
+					<img class="element__image" src='https://images.unsplash.com/photo-1536755017284-ad9a59d7e957?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8bmV3JTIweW9yayUyMG5pZ2h0fGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60' alt="Обложка книги">
+					<div class="element__contener">
+						<h2 class="element__title">Нью-йорк</h2>
+						<p class="element__subtitle">Нью-йорк</p>
+					</div>
+				</li>
+				<li class="element" >
+					<img class="element__image" src='https://images.unsplash.com/photo-1536755017284-ad9a59d7e957?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8bmV3JTIweW9yayUyMG5pZ2h0fGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60' alt="Обложка книги">
+					<div class="element__contener">
+						<h2 class="element__title">Нью-йорк</h2>
+						<p class="element__subtitle">Нью-йорк</p>
+					</div>
+				</li>
+				<li class="element" >
+					<img class="element__image" src='https://images.unsplash.com/photo-1536755017284-ad9a59d7e957?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8bmV3JTIweW9yayUyMG5pZ2h0fGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60' alt="Обложка книги">
+					<div class="element__contener">
+						<h2 class="element__title">Нью-йорк</h2>
+						<p class="element__subtitle">Нью-йорк</p>
+					</div>
+				</li>
+				<li class="element" >
+					<img class="element__image" src='https://images.unsplash.com/photo-1536755017284-ad9a59d7e957?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8bmV3JTIweW9yayUyMG5pZ2h0fGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60' alt="Обложка книги">
+					<div class="element__contener">
+						<h2 class="element__title">Нью-йорк</h2>
+						<p class="element__subtitle">Нью-йорк</p>
+					</div>
+				</li>
+				<li class="element" >
+					<img class="element__image" src='https://images.unsplash.com/photo-1536755017284-ad9a59d7e957?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8bmV3JTIweW9yayUyMG5pZ2h0fGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60' alt="Обложка книги">
+					<div class="element__contener">
+						<h2 class="element__title">Нью-йорк</h2>
+						<p class="element__subtitle">Нью-йорк</p>
+					</div>
+				</li>
+				<li class="element" >
+					<img class="element__image" src='https://images.unsplash.com/photo-1536755017284-ad9a59d7e957?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8bmV3JTIweW9yayUyMG5pZ2h0fGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60' alt="Обложка книги">
+					<div class="element__contener">
+						<h2 class="element__title">Нью-йорк</h2>
+						<p class="element__subtitle">Нью-йорк</p>
+					</div>
+				</li>
+				<li class="element" >
+					<img class="element__image" src='https://images.unsplash.com/photo-1536755017284-ad9a59d7e957?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8bmV3JTIweW9yayUyMG5pZ2h0fGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60' alt="Обложка книги">
+					<div class="element__contener">
+						<h2 class="element__title">Нью-йорк</h2>
+						<p class="element__subtitle">Нью-йорк</p>
+					</div>
+				</li>
+				<li class="element" >
+					<img class="element__image" src='https://images.unsplash.com/photo-1536755017284-ad9a59d7e957?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8bmV3JTIweW9yayUyMG5pZ2h0fGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60' alt="Обложка книги">
+					<div class="element__contener">
+						<h2 class="element__title">Нью-йорк</h2>
+						<p class="element__subtitle">Нью-йорк</p>
+					</div>
+				</li>
+			</ul>
+		</section>
+		<div class="popup popup__open popup_type_book">
+			<div class="popup__container popup__container_book">
+				<button class="popup__close popup__close_book" type="button"></button>
+				<img alt="Изображение" src=" " class="popup__img">
+				<div class="popup__container_info_book">
+					<h2 class="popup__title">Нью-йорк</h2>
+					<p class="popup__subtitle">Нью-йорк</p>
+					<p class="popup__data">31231234</p>
+					<p class="popup__publisher">erbrtehntrejtj</p>
+				</div>
+			</div>
+		</div>
+
+		<template class="element-template">
+			<li class="element" >
+				<img class="element__image" src='https://images.unsplash.com/photo-1536755017284-ad9a59d7e957?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8bmV3JTIweW9yayUyMG5pZ2h0fGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60' alt="Обложка книги">
+				<div class="element__contener">
+					<h2 class="element__title">Нью-йорк</h2>
+					<p class="element__subtitle">Нью-йорк</p>
+				</div>
+			</li>
 		</template>
 	</div>
 	
-
+<script src="./pages/index.js"></script>
 </body>
 
 </html>
