@@ -2,7 +2,7 @@ export default class Card {
 
 	constructor(data, cardSelector, handleCardClick ) {
 		this._name = data.title;
-		this._isbn = data.isbn[0];
+		this._isbn = data.isbn[1];
 		this._link = 'http://covers.openlibrary.org/b/isbn/';
 		this._author = data.author_name;
 		this._data = data.publish_date[0];
@@ -19,7 +19,7 @@ export default class Card {
 	}
 
 	//Генерация карточек по шаблону
-	generateCard(){
+	generateCard() {
 		this._element =  this._getTemplate();
 		this._elemenImg = this._element.querySelector('.element__image');
 		this._setEventListener();

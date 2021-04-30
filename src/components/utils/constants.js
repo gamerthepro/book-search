@@ -3,10 +3,6 @@ const apiConfig = {
 	url: "https://openlibrary.org/search.json?q=",
 }
 
-// const apiConfigImg = {
-// 	url: "http://covers.openlibrary.org/b/",
-// }
-
 const errorApi = err => {
 	console.error(err);
 	};

@@ -1,6 +1,6 @@
 .element {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	flex-wrap: wrap;
 	background: #FFFFFF;
 	border-radius: 10px;
